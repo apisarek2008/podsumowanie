@@ -14,15 +14,26 @@ public class MainScreenController {
 
 	@FXML
 	void initialize() {
+		Menu();
+
+	}
+
+	public void Menu() {
 		FXMLLoader menuScreen = new FXMLLoader(this.getClass().getResource("/fxml/MenuScreen.fxml"));
 		Pane pane = null;
 		try {
 			pane = menuScreen.load();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mainStackPane.getChildren().add(pane);
+		
+		MenuScreenController menuSController = menuScreen.getController();
+		menuSController.setMainController(this);
+		setScreen(pane);
+	}
 
+	public void setScreen(Pane pane) {
+		mainStackPane.getChildren().clear();
+		mainStackPane.getChildren().add(pane);
 	}
 }
